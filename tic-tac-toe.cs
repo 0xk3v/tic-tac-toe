@@ -7,9 +7,7 @@ namespace TicTacToe
 		static void Main(string[] args){
 
 			// Board Array...
-			string[] board = {"-", "-", "-",
-							  				"-", "-", "-",
-							  				"-", "-", "-"};
+			string[] board = {"-", "-", "-","-", "-", "-","-", "-", "-"};
 
 			// Game Characters...
 			string playerOne = "X";
@@ -22,34 +20,112 @@ namespace TicTacToe
 
 			// Game Controls...
 			bool gameFlag = true;
+			bool gameRunning = true;
 			int gameMenu;
+			string exitFlag;
 
-			Console.WriteLine("1. New Game");
-			Console.WriteLine("2. About The Author");
-			Console.WriteLine("3. Exit");
+			while (gameRunning) {
+				Console.WriteLine("\nWelcome to TicTacToe!!\n");
+				Console.WriteLine("1. New Game");
+				Console.WriteLine("2. About The Author");
+				Console.WriteLine("3. Exit");
 
-			// Checking for User Input...
-			Console.Write("\n> ");
-			gameMenu = Convert.ToInt32(Console.ReadLine());
+				// Checking for User Input...
+				Console.Write("\n> ");
+				gameMenu = Convert.ToInt32(Console.ReadLine());
 
-			if (gameMenu == 1) {
-				Console.Clear();
-				while (gameFlag)
-				{
+				if (gameMenu == 1) {
+					Console.Clear();
+					// The big while goes here...
+					while (gameFlag)
+					{
+
 					// Checking for a tie...
 					if ((Array.IndexOf(board, "-")) == -1)
 					{
-						// Printing the Game Board...
+					    // Printing the Game Board...
 						Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
 						Console.WriteLine(" ---+---+---");
 						Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
 						Console.WriteLine(" ---+---+---");
-						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
-
+						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);	
+						
 						// Ending The Game due to a Tie...
-						Console.WriteLine("It\'s a Tie!!");
-						gameFlag = false;
+						Console.Clear();
+					    Console.WriteLine("It\'s a Tie!!");
+					    gameFlag = false;
+						break;
+
 					} // End IF
+
+					// Printing the Game Board...
+					Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
+					Console.WriteLine(" ---+---+---");
+					Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
+					Console.WriteLine(" ---+---+---");
+					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
+
+					// Checking For Column...
+					if (board[0] == board[1] && board[0] == board[2] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[3] == board[4] && board[3] == board[5] && board[3] != "-")
+					{
+						winner = board[3];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[6] == board[7] && board[6] == board[8] && board[6] != "-")
+					{
+						winner = board[6];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+
+					// Checking For Row...
+					if (board[0] == board[3] && board[0] == board[6] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[1] == board[4] && board[1] == board[7] && board[1] != "-")
+					{
+						winner = board[1];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[2] == board[5] && board[2] == board[8] && board[2] != "-")
+					{
+						winner = board[2];
+					    Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+
+					// Checking For Diagonal...
+					if (board[0] == board[4] && board[0] == board[8] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[2] == board[4] && board[2] == board[6] && board[2] != "-")
+					{
+						winner = board[2];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
 
 					// Getting User 1 Input...
 					Console.Write("X\'s Move > ");
@@ -71,6 +147,22 @@ namespace TicTacToe
 					Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
 					Console.WriteLine(" ---+---+---");
 					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
+					
+					// Checking for a tie...
+					if ((Array.IndexOf(board, "-")) == -1)
+					{
+						// Printing the Game Board...
+						Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
+						Console.WriteLine(" ---+---+---");
+						Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
+						Console.WriteLine(" ---+---+---");
+						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
+
+						// Ending The Game due to a Tie...
+						Console.WriteLine("It\'s a Tie!!");
+						gameFlag = false;
+						break;
+					} // End IF
 
 					// Getting User 2 Input...
 					Console.Write("O\'s Move > ");
@@ -85,106 +177,31 @@ namespace TicTacToe
 					{
 						Console.WriteLine("Invalid Move");
 					}
-					// Checking for a tie...
-					if ((Array.IndexOf(board, "-")) == -1)
-					{
-						// Printing the Game Board...
-						Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
-						Console.WriteLine(" ---+---+---");
-						Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
-						Console.WriteLine(" ---+---+---");
-						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
-
-						// Ending The Game due to a Tie...
-						Console.WriteLine("It\'s a Tie!!");
-						gameFlag = false;
-					} // End IF
-
-					// Printing the Game Board...
-					Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
-					Console.WriteLine(" ---+---+---");
-					Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
-					Console.WriteLine(" ---+---+---");
-					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
-
-					// Checking For Column...
-					if (board[0] == board[1] && board[0] == board[2] && board[0] != "-")
-					{
-						winner = board[0];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-					else if (board[3] == board[4] && board[3] == board[5] && board[3] != "-")
-					{
-						winner = board[3];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-					else if (board[6] == board[7] && board[6] == board[8] && board[6] != "-")
-					{
-						winner = board[6];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-
-					// Checking For Row...
-					if (board[0] == board[3] && board[0] == board[6] && board[0] != "-")
-					{
-						winner = board[0];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-					else if (board[1] == board[4] && board[1] == board[7] && board[1] != "-")
-					{
-						winner = board[1];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-					else if (board[2] == board[5] && board[2] == board[8] && board[2] != "-")
-					{
-						winner = board[2];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-
-					// Checking For Diagonal...
-					if (board[0] == board[4] && board[0] == board[8] && board[0] != "-")
-					{
-						winner = board[0];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-					else if (board[2] == board[4] && board[2] == board[6] && board[2] != "-")
-					{
-						winner = board[2];
-						Console.WriteLine("The Winner is {0}", winner);
-						gameFlag = false;
-					}
-
-					// Checking for a tie...
-					if ((Array.IndexOf(board, "-")) == -1)
-					{
-						// Printing the Game Board...
-						Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
-						Console.WriteLine(" ---+---+---");
-						Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
-						Console.WriteLine(" ---+---+---");
-						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
-
-						// Ending The Game due to a Tie...
-						Console.WriteLine("It\'s a Tie!!");
-						gameFlag = false;
-					} // End IF
-
 				} // End of While
 
-			}// End of IF-1
-
-			else if (gameMenu == 2) {
-				Console.WriteLine("Kevin, A Computer Science Student at WSB University in Poznan :)");
-			}
-			else if (gameMenu == 3) {
-				return;
+				}// End of IF-1
+				else if (gameMenu == 2) {
+					Console.WriteLine("Kevin, A Computer Science Student at WSB University in Poznan :)");
+					Console.Write("Press Enter to Return to Main Menu!");
+					ConsoleKey key = Console.ReadKey().Key;
+					if (key == ConsoleKey.Enter)
+					{
+						continue;
+					}
+				}
+				else if (gameMenu == 3) {
+					Console.Write("Are you sure you want to Exit??  [y/n]\n> ");
+					exitFlag = Console.ReadLine();
+					if (exitFlag.ToLower() == "y") {
+						gameRunning = false;
+					}
+					else{
+						continue;
+					}
+				}
+				else{
+					Console.WriteLine("Invalid Input!!");
+				}
 			}
 		}
 	}
