@@ -35,6 +35,14 @@ namespace TicTacToe
 				gameMenu = Convert.ToInt32(Console.ReadLine());
 
 				if (gameMenu == 1) {
+					// Resetting the Game Controller...
+					gameFlag = true;					
+					// Resetting the board in case of Re Match...
+					for (int i = 0; i < board.Length; i++)
+					{
+						board[i] = "-";
+					}
+
 					Console.Clear();
 					// The big while goes here...
 					while (gameFlag)
@@ -148,6 +156,69 @@ namespace TicTacToe
 					Console.WriteLine(" ---+---+---");
 					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
 					
+					// Checking For Column...
+					if (board[0] == board[1] && board[0] == board[2] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[3] == board[4] && board[3] == board[5] && board[3] != "-")
+					{
+						winner = board[3];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[6] == board[7] && board[6] == board[8] && board[6] != "-")
+					{
+						winner = board[6];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+
+					// Checking For Row...
+					if (board[0] == board[3] && board[0] == board[6] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[1] == board[4] && board[1] == board[7] && board[1] != "-")
+					{
+						winner = board[1];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[2] == board[5] && board[2] == board[8] && board[2] != "-")
+					{
+						winner = board[2];
+					    Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+
+					// Checking For Diagonal...
+					if (board[0] == board[4] && board[0] == board[8] && board[0] != "-")
+					{
+						winner = board[0];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+					else if (board[2] == board[4] && board[2] == board[6] && board[2] != "-")
+					{
+						winner = board[2];
+						Console.WriteLine("The Winner is {0}", winner);
+						gameFlag = false;
+						break;
+					}
+
+					
 					// Checking for a tie...
 					if ((Array.IndexOf(board, "-")) == -1)
 					{
@@ -177,6 +248,7 @@ namespace TicTacToe
 					{
 						Console.WriteLine("Invalid Move");
 					}
+
 				} // End of While
 
 				}// End of IF-1
