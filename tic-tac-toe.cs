@@ -1,8 +1,9 @@
 using System;
+using Game;
 
-namespace TicTacToe
+namespace Game
 {
-	class Game
+	class TicTacToe
 	{
 		static void Main(string[] args){
 
@@ -82,7 +83,7 @@ namespace TicTacToe
 						break;
 					}
 					else if (board[3] == board[4] && board[3] == board[5] && board[3] != "-")
-					{
+			{
 						winner = board[3];
 						Console.WriteLine("The Winner is {0}", winner);
 						gameFlag = false;
