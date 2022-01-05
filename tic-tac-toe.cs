@@ -32,7 +32,7 @@ namespace TicTacToe
 
 				// Checking for User Input...
 				Console.Write("\n> ");
-				gameMenu = Convert.ToInt32(Console.ReadLine());
+				while(!int.TryParse(Console.ReadLine(), out gameMenu) || gameMenu < 1 || gameMenu > 3);
 
 				if (gameMenu == 1) {
 					// Resetting the Game Controller...
@@ -51,16 +51,16 @@ namespace TicTacToe
 					// Checking for a tie...
 					if ((Array.IndexOf(board, "-")) == -1)
 					{
-					    // Printing the Game Board...
+					// Printing the Game Board...
 						Console.WriteLine( "\n  " + board[0] + " | " + board[1] + " | " + board[2]);
 						Console.WriteLine(" ---+---+---");
 						Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
 						Console.WriteLine(" ---+---+---");
 						Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);	
 						
-						// Ending The Game due to a Tie...
+					// Ending The Game due to a Tie...
 						Console.Clear();
-					    Console.WriteLine("It\'s a Tie!!");
+						Console.WriteLine("It\'s a Tie!!");
 					    gameFlag = false;
 						break;
 
@@ -137,7 +137,7 @@ namespace TicTacToe
 
 					// Getting User 1 Input...
 					Console.Write("X\'s Move > ");
-					userInput1 = Convert.ToInt32(Console.ReadLine());
+					while(!int.TryParse(Console.ReadLine(), out userInput1));
 
 					// Validating User Input 1...
 					if (userInput1 >= 1 && userInput1 <= 9 && board[userInput1-1] == "-" )
@@ -154,9 +154,10 @@ namespace TicTacToe
 					Console.WriteLine(" ---+---+---");
 					Console.WriteLine( "  " + board[3] + " | " + board[4] + " | " + board[5]);
 					Console.WriteLine(" ---+---+---");
-					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);
+					Console.WriteLine( "  " + board[6] + " | " + board[7] + " | " + board[8]);	
 					
 					// Checking For Column...
+
 					if (board[0] == board[1] && board[0] == board[2] && board[0] != "-")
 					{
 						winner = board[0];
@@ -217,7 +218,6 @@ namespace TicTacToe
 						gameFlag = false;
 						break;
 					}
-
 					
 					// Checking for a tie...
 					if ((Array.IndexOf(board, "-")) == -1)
@@ -237,7 +237,7 @@ namespace TicTacToe
 
 					// Getting User 2 Input...
 					Console.Write("O\'s Move > ");
-					userInput2 = Convert.ToInt32(Console.ReadLine());
+					while(!int.TryParse(Console.ReadLine(), out userInput2));
 
 					// Validating User Input 2...
 					if (userInput2 >= 1 && userInput2 <= 9 && board[userInput2-1] == "-" )
@@ -262,13 +262,17 @@ namespace TicTacToe
 					}
 				}
 				else if (gameMenu == 3) {
-					Console.Write("Are you sure you want to Exit??  [y/n]\n> ");
+					Console.Write("Are you sure you want to Exit??  [y/n] > ");
 					exitFlag = Console.ReadLine();
 					if (exitFlag.ToLower() == "y") {
 						gameRunning = false;
 					}
-					else{
+					else if (exitFlag.ToLower() == "n")
+					{
 						continue;
+					}
+					else{
+						Console.WriteLine("Invalid Input");
 					}
 				}
 				else{
