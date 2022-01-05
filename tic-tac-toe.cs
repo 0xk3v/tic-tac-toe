@@ -1,8 +1,8 @@
 using System;
 
-namespace TicTacToe
+namespace Game
 {
-	class Game
+	class TicTacToe
 	{
 		static void Main(string[] args){
 
@@ -282,3 +282,4 @@ namespace TicTacToe
 		}
 	}
 }
+
