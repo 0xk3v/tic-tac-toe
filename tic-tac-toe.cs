@@ -83,7 +83,7 @@ namespace Game
 						break;
 					}
 					else if (board[3] == board[4] && board[3] == board[5] && board[3] != "-")
-			{
+					{
 						winner = board[3];
 						Console.WriteLine("The Winner is {0}", winner);
 						gameFlag = false;
