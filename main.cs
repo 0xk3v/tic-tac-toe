@@ -18,8 +18,10 @@ namespace Program
 			{
 				int UserInput = menu.GetInput(1, 3);
 
-				if (UserInput == 1)
+				if (UserInput == 1){
+					game.Reset();
 					game.Run();
+				}
 				else if (UserInput == 2)
 					menu.ShowAuthor();
 				else if (UserInput == 3)
@@ -186,7 +188,6 @@ namespace Program
 				DrawBoard();
 				Console.WriteLine("\nIt's a Draw :)");
 				GameFlag = false;
-				/* ResetGame(); */
 			}
 		}
 		
@@ -208,14 +209,15 @@ namespace Program
 				DrawBoard();
 				Console.WriteLine($"The Winner is {Winner}");
 				GameFlag = false;
-				/* ResetGame(); */
 			}
 		}
 
 		// Method to Reset The Game...
-		public void ResetGame(){
+		public void Reset(){
 			for (int i = 0; i < Board.Length; i++)
 				Board[i] = "-";
+			Winner = "";
+			GameFlag = true;
 		}
 		// Method to Run the Game Loop...
 		public void Run()
