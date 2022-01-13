@@ -7,36 +7,36 @@ namespace Program
 
 		static void Main(string[] args)
 		{
-			// Class Instantiation...
-			Menu menu = new Menu();
-			Game game = new Game();
-
-			// Game Controller...
-			
 			// Game's Main Loop...
-			do
-			{
-				int UserInput = menu.GetInput(1, 3);
-
-				if (UserInput == 1){
-					game.Reset();
-					game.Run();
-				}
-				else if (UserInput == 2)
-					menu.ShowAuthor();
-				else if (UserInput == 3)
-					menu.Quit();
-			} while (menu.GameState);	
+			Menu.Display();
 		}
 	}
 
 	// Class to handle Menu...
 	public class Menu
 	{
-		public bool GameState = true;
+		public static bool GameState = true;
+
+		// Method to Handling The Game's Main Loop
+		public static void Display()
+		{
+			do
+			{
+				int UserInput = GetInput(1, 3);
+
+				if (UserInput == 1){
+					Game.Reset();
+					Game.Run();
+				}
+				else if (UserInput == 2)
+					ShowAuthor();
+				else if (UserInput == 3)
+					Quit();
+			} while (GameState);	
+		}
 
 		// Method to Display The Game Menu...
-		public void Display()
+		static void MenuUI()
 		{
 			Console.WriteLine("\n Welcome to TicTacToe!!\n");
 			Console.WriteLine("   1. New Game");
@@ -45,9 +45,9 @@ namespace Program
 		}
 
 		// Method to Receive and Sanitize Inputs...
-		public int GetInput(int Min, int Max)
+		static int GetInput(int Min, int Max)
 		{
-			Display();
+			MenuUI();
 			if( Min >= Max )
 				throw new Exception("Wrong Input");
 			int Choice;
@@ -58,7 +58,7 @@ namespace Program
 		}
 		
 		// Method to Display Information on the Author...
-		public void ShowAuthor()
+		static void ShowAuthor()
 		{
 			Console.WriteLine("A Computer Science Student at WSB University in Poznan :)");
 			Console.WriteLine("\nPress Enter to Return to Main Menu!");
@@ -68,7 +68,7 @@ namespace Program
 		}	
 
 		// Method to Terminate The Game...
-		public void Quit()
+		static void Quit()
 		{
 			Console.Write("Are you sure you want to Exit??  [y/n] > ");
 			string exitFlag = Console.ReadLine();
@@ -87,13 +87,14 @@ namespace Program
 	public class Game
 	{
 		// Board Declaration...
-		public string[] Board = {"-", "-", "-","-", "-", "-","-", "-", "-"};
-		public string CurrentPlayer = "X";
-		public string Winner;
-		public bool GameFlag = true;
+		static string[] Board = {"-", "-", "-","-", "-", "-","-", "-", "-"};
+		static string CurrentPlayer = "X";
+		static string Winner;
+		static bool GameFlag = true;
+		static string GameError = " ";
 
 		// Method to Draw The Board...
-		public void DrawBoard()
+		static void DrawBoard()
 		{
 			// Drawing the Board...
 			Console.WriteLine();
@@ -106,7 +107,7 @@ namespace Program
 		}
 
 		// Method to handle user inputs...
-		public void HandleInputs()
+		static void HandleInputs()
 		{
 			int userInput;
 			Console.Write($"{CurrentPlayer}\'s Move > ");
@@ -114,11 +115,11 @@ namespace Program
 			if (userInput >= 1 && userInput < 10 && Board[userInput-1] == "-")
 				Board[userInput-1] = CurrentPlayer;
 			else
-				Console.WriteLine("Invalid Move");
+				GameError = "Invalid Move!!";
 		}
 
 		// Method to Check The Winner through Vertical Moves...
-		public bool CheckVertical()
+		static bool CheckVertical()
 		{
 			if (Board[0] == Board[3] && Board[0] == Board[6] && Board[0] != "-")
 			{
@@ -141,7 +142,7 @@ namespace Program
 		}
 
 		// Method to Check The Winner through Horizontal Moves...
-		public bool CheckHorizontal()
+		static bool CheckHorizontal()
 		{
 			if (Board[0] == Board[1] && Board[0] == Board[2] && Board[0] != "-")
 			{
@@ -163,7 +164,7 @@ namespace Program
 		}
 
 		// Method to Check The Winner through Diagonal Moves...
-		public bool CheckDiagonal()
+		static bool CheckDiagonal()
 		{
 			if (Board[0] == Board[4] && Board[0] == Board[8] && Board[0] != "-")
 			{
@@ -180,7 +181,7 @@ namespace Program
 		}
 
 		// Method to Check for a Draw...
-		public void CheckDraw()
+		static void CheckDraw()
 		{
 			if ((Array.IndexOf(Board, "-")) == -1)
 			{
@@ -192,7 +193,7 @@ namespace Program
 		}
 		
 		// Method to Switch Players...
-		public void SwitchPlayers()
+		static void SwitchPlayers()
 		{
 			if (CurrentPlayer == "X")
 				CurrentPlayer = "O";
@@ -201,7 +202,7 @@ namespace Program
 		}
 
 		// Method to Check the winner...
-		public void CheckWinner()
+		static void CheckWinner()
 		{
 			if (CheckVertical() || CheckHorizontal() || CheckDiagonal() )
 			{
@@ -213,18 +214,20 @@ namespace Program
 		}
 
 		// Method to Reset The Game...
-		public void Reset(){
+		public static void Reset(){
 			for (int i = 0; i < Board.Length; i++)
 				Board[i] = "-";
 			Winner = "";
 			GameFlag = true;
 		}
 		// Method to Run the Game Loop...
-		public void Run()
+		public static void Run()
 		{
 			while (GameFlag)
 			{
 				Console.Clear();
+				if (GameError != " ") Console.WriteLine(GameError);
+				GameError = " ";
 				DrawBoard();
 				HandleInputs();
 				CheckWinner();
