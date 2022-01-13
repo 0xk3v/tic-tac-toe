@@ -15,7 +15,7 @@ namespace Program
 	// Class to handle Menu...
 	public class Menu
 	{
-		public static bool GameState = true;
+		static bool GameState = true;
 
 		// Method to Handling The Game's Main Loop
 		public static void Display()
