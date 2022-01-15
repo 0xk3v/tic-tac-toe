@@ -7,7 +7,7 @@ namespace Program
 
 		static void Main(string[] args)
 		{
-			// Game Memu Display...
+			// Game Menu Display...
 			Menu.Display();
 		}
 	}
