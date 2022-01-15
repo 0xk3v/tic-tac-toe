@@ -7,7 +7,7 @@ namespace Program
 
 		static void Main(string[] args)
 		{
-			// Game's Main Loop...
+			// Game Memu Display...
 			Menu.Display();
 		}
 	}
@@ -17,7 +17,7 @@ namespace Program
 	{
 		static bool GameState = true;
 
-		// Method to Handling The Game's Main Loop
+		// Method to Handle The Game's Main Loop
 		public static void Display()
 		{
 			do
